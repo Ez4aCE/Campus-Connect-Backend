@@ -6,11 +6,12 @@ import (
 
 "campus-connect-backend/internal/config"
 "github.com/gin-gonic/gin"
+"campus-connect-backend/internal/db"
 )
 
 func main(){
 	config.Load()
-
+	db.ConnectPostgres()
 	r:=gin.Default()
 
 	r.GET("/health", func (c *gin.Context){ 
