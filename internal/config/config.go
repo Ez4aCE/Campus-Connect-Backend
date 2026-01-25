@@ -2,7 +2,7 @@ package config
 
 import (
 	"os"
-	"log"
+	"log/slog"
 	"github.com/joho/godotenv"
 )
 
@@ -23,7 +23,7 @@ func Load(){
 	err:=godotenv.Load();
 
 	if err!=nil{
-		log.Println("No .env file found, using system env")
+		slog.Info("No .env file found, using system env")
 	}
 
 	AppConfig=Config{

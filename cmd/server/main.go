@@ -1,7 +1,7 @@
 package main
 
 import (
-"log"
+"log/slog"
 
 
 "campus-connect-backend/internal/config"
@@ -21,7 +21,7 @@ func main(){
 		})
 	})
 	
-	log.Println("Starting server on port ",config.AppConfig.AppPort)
+	slog.Info("Starting server","port",config.AppConfig.AppPort)
 	r.Run(":"+config.AppConfig.AppPort)
 
 }
