@@ -7,9 +7,10 @@ import (
 )
 
 type Config struct{
-	AppName string
-	AppPort string
-	DatabaseURL string
+	AppName      string
+	AppPort      string
+	DatabaseURL  string
+	JWTSecret    string
 } 
 
 var AppConfig Config
@@ -25,5 +26,6 @@ func Load(){
 		AppName: os.Getenv("APP_NAME"),
 		AppPort: os.Getenv("APP_PORT"),
 		DatabaseURL: os.Getenv("DATABASE_URL"),
+		JWTSecret: os.Getenv("JWT_SECRET"),
 	}
 }

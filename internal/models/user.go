@@ -7,13 +7,13 @@ import(
 )
 
 type User struct{
-	ID uuid.UUID `gorm:"type:uuid;primaryKey"`
-	Name string `gorm:"not null"`
-	Email string `gorm:"not null"`
-	Password string `gorm:"not null"`
-	Role string  `gorm:"not null;default:'participant'"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID            uuid.UUID  `gorm:"type:uuid;primaryKey"`
+	Name          string     `gorm:"not null"`
+	Email         string     `gorm:"unique;not null"`
+	PasswordHash  string     `gorm:"not null"`
+	Role          string     `gorm:"not null;default:'participant'"`
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) error{
