@@ -80,3 +80,14 @@ func Login(c *gin.Context){
 
 	c.JSON(http.StatusOK, gin.H{"token":token})
 }
+
+func Me(c *gin.Context) {
+
+	userID, _ := c.Get("userID")
+	role, _ := c.Get("role")
+
+	c.JSON(http.StatusOK, gin.H{
+		"user_id": userID,
+		"role":    role,
+	})
+}
