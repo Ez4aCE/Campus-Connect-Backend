@@ -1,10 +1,10 @@
 package routes
 
-
 import (
-"campus-connect-backend/internal/handlers"
-"github.com/gin-gonic/gin"
+	"campus-connect-backend/internal/handlers"
 	"campus-connect-backend/internal/middleware"
+
+	"github.com/gin-gonic/gin"
 )
 
 func RegisterRoutes(r *gin.Engine){
@@ -15,6 +15,8 @@ func RegisterRoutes(r *gin.Engine){
 		auth.POST("/register",handlers.Register)
 		auth.POST("/login",handlers.Login)
 	}
+
+	RegisterClubRoutes(api)
 
 	protected:=api.Group("/")
 	protected.Use(middleware.JWTAuth())
