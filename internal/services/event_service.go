@@ -28,7 +28,7 @@ func NewEventService() *EventService{
 	}
 }
 
-func (s *EventService) CreateGlobalHandler(userID uuid.UUID, role string, event *models.Event) error{
+func (s *EventService) CreateGlobalEvent(userID uuid.UUID, role string, event *models.Event) error{
 	if role!="admin" && role!="organizer"{
 		return ErrUnauthorizedEvent
 	}
@@ -101,7 +101,7 @@ func (s *EventService) CancelEvent(userID uuid.UUID, role string, eventID uuid.U
 		return ErrEventNotFound
 	}
 
-	if event.Status=="completed"{
+	if event.Status == "completed" || event.Status == "cancelled" {
 		return ErrInvalidEventState
 	}
 

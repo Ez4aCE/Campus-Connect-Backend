@@ -16,8 +16,8 @@ type Event struct {
 	StartTime time.Time `gorm:"not null" json:"start_time"`
 	EndTime   time.Time `gorm:"not null" json:"end_time"`
 
-	Capacity        int `gorm:"not null" json:"capacity"`
-	RegisteredCount int `gorm:"not null;default:0" json:"registered_count"`
+	Capacity int `gorm:"not null;check:capacity > 0" json:"capacity"`
+	RegisteredCount int `gorm:"not null;default:0;check:registered_count >= 0" json:"registered_count"`
 
 	Status string `gorm:"type:varchar(30);not null;default:'draft';index" json:"status"`
 

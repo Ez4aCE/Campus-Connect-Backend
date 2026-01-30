@@ -47,12 +47,13 @@ func (h *EventHandler) CreateGlobalEvent(c *gin.Context){
 
 	if err!=nil{
 		c.JSON(http.StatusBadRequest, gin.H{"error":err.Error()})
+		return
 	}
 	role:=c.MustGet("role").(string)
 
 	event :=mapToEventModel(req)
 
-	if err:= h.service.CreateGlobalHandler(userID, role, event); err!=nil{
+	if err:= h.service.CreateGlobalEvent(userID, role, event); err!=nil{
 		c.JSON(http.StatusForbidden,gin.H{"error":err.Error()})
 		return
 	}
