@@ -28,7 +28,11 @@ func ConnectPostgres(){
 
 	err=DB.AutoMigrate(&models.User{},
 					&models.Club{},
-				&models.ClubMembership{})
+				&models.ClubMembership{},
+			&models.Event{},
+		&models.EventRegistration{},
+	&models.Notification{},
+&models.NotificationUser{})
 
 	if err!=nil{
 		slog.Error("Migration failed","error",err)
