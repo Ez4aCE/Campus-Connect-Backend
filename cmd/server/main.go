@@ -6,7 +6,10 @@ import (
 
 	"campus-connect-backend/internal/config"
 	"campus-connect-backend/internal/db"
+	"campus-connect-backend/internal/events"
+	"campus-connect-backend/internal/handlers"
 	"campus-connect-backend/internal/routes"
+	"campus-connect-backend/internal/services"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -15,6 +18,18 @@ import (
 func main(){
 	config.Load()
 	db.ConnectPostgres()
+
+	dispatcher:= events.NewInMemoryDispatcher()
+
+	notificationService:= services.NewNotificationService(db.DB)
+	notificationHandler:= handlers.NewNotificationHandler(notificationService)
+
+	dispatcher.Register(events.EventTypeEventPublished, notificationHandler)
+dispatcher.Register(events.EventTypeEventCancelled, notificationHandler)
+dispatcher.Register(events.EventTypeMembershipApproved, notificationHandler)
+dispatcher.Register(events.EventTypeClubApproved, notificationHandler)
+dispatcher.Register(events.EventTypeRegistrationConfirmed, notificationHandler)
+
 	r:=gin.Default()
 
 	r.Use(cors.New(cors.Config{

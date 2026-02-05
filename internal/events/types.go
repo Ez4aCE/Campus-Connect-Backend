@@ -61,14 +61,14 @@ func (e ClubApproved) EventType() string{
 	return EventTypeClubApproved
 }
 
-//Registartion Confirmed
-type RegistartionConfirmed struct{
+//Registration Confirmed
+type RegistrationConfirmed struct{
 	BaseEvent
 	EventID uuid.UUID
 	UserID uuid.UUID
 }
 
-func (e RegistartionConfirmed) EventType() string{
+func (e RegistrationConfirmed) EventType() string{
 	return EventTypeRegistrationConfirmed
 }
 
